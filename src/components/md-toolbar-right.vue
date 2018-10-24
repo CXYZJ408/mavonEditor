@@ -60,7 +60,7 @@ export default {
     methods: {
         // 工具栏功能图标click-----------------
         $clicks(_type) {
-            // 让父节点来绑定事件并
+            // 让父节点来绑定事件并处理
             this.$emit('toolbar_right_click', _type);
         }
     }
