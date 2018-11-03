@@ -29,7 +29,7 @@
                     <!-- 双栏 -->
                     <v-autoTextarea ref="vNoteTextarea" :placeholder="placeholder ? placeholder : d_words.start_editor"
                                     class="content-input" :fontSize="fontSize"
-                                    lineHeight="1.5" v-model="d_value" fullHeight></v-autoTextarea>
+                                    lineHeight="1.5" v-model="d_value" fullHeight :onchange="test"></v-autoTextarea>
                 </div>
             </div>
             <!--展示区-->
@@ -60,7 +60,7 @@
         <!--帮助文档-->
         <transition name="fade">
             <div ref="help">
-                <div  class="v-note-help-wrapper" v-if="s_help">
+                <div class="v-note-help-wrapper" v-if="s_help">
                     <div class="v-note-help-content markdown-body" :class="{'shadow': boxShadow}">
                         <i @click.stop.prevent="toolbar_right_click('help')" class="fa fa-mavon-times"
                            aria-hidden="true"></i>
@@ -229,7 +229,7 @@
                     if (!default_open_) {
                         default_open_ = this.subfield ? 'preview' : 'edit';
                     }
-                    return default_open_ === 'preview' ? true : false;
+                    return default_open_ === 'preview';
                 })(), // props true 展示编辑 false展示预览
                 s_fullScreen: false,// 全屏编辑标志
                 s_help: false,// markdown帮助
@@ -325,6 +325,9 @@
             return this.mixins[0].data().markdownIt
         },
         methods: {
+            test() {
+                console.log('hasChanged')
+            },
             loadExternalLink(name, type, callback) {
                 if (typeof this.p_external_link[name] !== 'function') {
                     if (this.p_external_link[name] !== false) {
@@ -532,6 +535,9 @@
             // 获取textarea dom节点
             getTextareaDom() {
                 return this.$refs.vNoteTextarea.$refs.vTextarea;
+            },
+            clearTextArea() {
+                this.$emit('trash')
             },
             // 工具栏插入内容
             insertText(obj, {prefix, subfix, str, type}) {
