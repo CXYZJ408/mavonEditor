@@ -491,6 +491,7 @@
                 this.$emit('fullScreen', status, val)
             },
             // 打开阅读模式触发（status , val）
+            // 打开阅读模式触发（status , val）
             readmodel(status, val) {
                 this.$emit('readModel', status, val)
             },

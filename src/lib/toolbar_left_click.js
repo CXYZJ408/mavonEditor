@@ -38,6 +38,7 @@ function $toolbar_left_redo_click($vm) {
 
 function $toolbar_left_trash_click($vm) {
     $vm.d_value = ''
+    $vm.clearTextArea()
     $vm.getTextareaDom().focus()
     // $vm.$refs.vNoteDivEdit.innerHTML = $vm.s_markdown.render($vm.d_value)
 }
